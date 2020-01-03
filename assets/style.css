@@ -1,0 +1,38 @@
+/* color references
+
+white: #FCFFF7
+pink: #ED6A5A
+teal: #17BEBB
+dusty blue: #9BC1BC
+pale yellow: #F4F1BB
+
+*/
+
+body {
+    background: url("images/valentin-muller-bWtd1ZyEy6w-unsplash.jpg");
+}
+
+i {
+    font-size: xx-large;
+}
+
+#weatherDashboardTitle {
+    font-size: 5rem;
+    color: #FCFFF7;
+}
+
+#weatherBox {
+    background-color: #ED6A5A;
+}
+
+.footer {
+    background: transparent;
+}
+
+#footerTxt {
+    color: #FCFFF7;
+}
+
+a {
+    color: #17BEBB;
+}

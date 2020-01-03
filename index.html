@@ -6,20 +6,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Weather Dashboard</title>
+    <!--Bulma instead of Bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <link rel="stylesheet" href="assets/style.css">
+
     <!--weather icons from Erik Flowers-->
     <link rel="stylesheet" href="assets\images\weather-icons-master\css\weather-icons.css">
+    <!--fonts from Google-->
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond|Raleway&display=swap" rel="stylesheet">
+    <!--link to style-->
+    <link rel="stylesheet" href="assets/style.css">
 
 </head>
 
 <body>
+    <section class="hero is-small">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title" id="weatherDashboardTitle">
+                    Weather Dashboard
+                </h1>
+            </div>
+        </div>
+    </section>
 
+    <div class="tile is-parent">
+        <article class="tile is-child notification is-danger" id="weatherBox">
+            <!--Dynamically append the city name here.-->
+            <p class="title" id="cityForecast"></p>
+            <div class="columns is-multiline">
+                <!-- Content -->
+                <div class="column" id="currentCityWeather">
+                    <figure class="image">
+                        <i id="currentIcon"></i></figure>
+                    <h1 class="weatherTemp has-text-centered is-size-2" id="currentTemp">
+                        <!--Add temperature here!-->
+                    </h1>
+                    <h3 class="weatherCondition has-text-centered is-size-5" id="currentCondition">
+                        <!--Replace text with string that tells you conditions, like, windy, clear, sunny, stormy-->
+                        Current weather
+                    </h3>
+                </div>
+                <div class="column" id="day1Forecast">
+                    <figure class="image">
+                        <i id="day1Icon"></i></figure>
+                    <h1 class="weatherTemp has-text-centered is-size-2" id="day1Temp">
+                    </h1>
+                    <h3 class="weatherCondition has-text-centered is-size-5" id="day1Condition">
+                        Day 1 weather
+                    </h3>
+                </div>
+                <div class="column" id="day2Forecast">
+                    <figure class="image">
+                        <i id="day2Icon"></i></figure>
+                    <h1 class="weatherTemp has-text-centered is-size-2" id="day2Temp">
+                    </h1>
+                    <h3 class="weatherCondition has-text-centered is-size-5" id="day2Condition">
+                        Day 2 weather
+                    </h3>
+                </div>
+                <div class="column" id="day3Forecast">
+                    <figure class="image">
+                        <i id="day3Icon"></i></figure>
+                    <h1 class="weatherTemp has-text-centered is-size-2" id="day3Temp">
+                    </h1>
+                    <h3 class="weatherCondition has-text-centered is-size-5" id="day3Condition">
+                        Day 3 weather
+                    </h3>
+                </div>
+                <div class="column" id="day4Forecast">
+                    <figure class="image">
+                        <i id="day4Icon"></i></figure>
+                    <h1 class="weatherTemp has-text-centered is-size-2" id="day4Temp">
+                    </h1>
+                    <h3 class="weatherCondition has-text-centered is-size-5" id="day4Condition">
+                        Day 4 weather
+                    </h3>
+                </div>
+                <div class="column" id="day5Forecast">
+                    <figure class="image">
+                        <i id="day5Icon"></i></figure>
+                    <h1 class="weatherTemp has-text-centered is-size-2" id="day5Temp">
+                    </h1>
+                    <h3 class="weatherCondition has-text-centered is-size-5" id="day5Condition">
+                        Day 5 weather
+                    </h3>
+                </div>
+            </div>
+        </article>
+    </div>
+    </div>
+    </div>
 
-
-
-    <script type='text/javascript' src='config.js'></script>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p id="footerTxt">
+                Weather Dashboard by <a href="https://github.com/cml2377">Crystal Ly</a>. Copyright &copy; 2020
+            </p>
+        </div>
+        <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+            href="https://unsplash.com/@valentinmuellerandalanmueller?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+            target="_blank" rel="noopener noreferrer"
+            title="Download free do whatever you want high-resolution photos from Valentin Müller"><span
+                style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg"
+                    style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
+                    viewBox="0 0 32 32">
+                    <title>unsplash-logo</title>
+                    <path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path>
+                </svg></span><span style="display:inline-block;padding:2px 3px">Valentin Müller</span></a>
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="script.js" defer></script>
 </body>
