@@ -30,88 +30,109 @@
         </div>
     </section>
 
-    <div class="columns is ancestor">
-        <div class="column is-one-third">
-            <!--Search bar and frequently searched cities-->
-        </div>
-        <div class="column is-two-thirds">
-            <div class="tile is-parent is-vertical">
-                <article class="tile is-child" id="cityStats">
-                    City Stats
+    <div class="container">
+        <div class="columns is-ancestor">
+            <div class="column is-one-third">
+                <article class="tile is-child notification" id="searchBox">
+                    <!--Search bar and frequently searched cities-->
+                    <p class="title">Search</p>
+                    <div id="searchBox">
+                        <label class="label is-medium">City</label>
+                        <!--Input field for City-->
+                        <div class="control">
+                            <input class="input" type="text" placeholder="City" id="cityInput">
+                        </div>
+                        <br>
+                        <div id="frequentlySearched">
+                            <button class="button is-info is-outlined">Austin</button>
+                            <button class="button is-info is-outlined">Chicago</button>
+                            <button class="button is-info is-outlined">New York</button>
+                            <button class="button is-info is-outlined">Orlando</button>
+                            <button class="button is-info is-outlined">San Francisco</button>
+                            <button class="button is-info is-outlined">Seattle</button>
+                            <button class="button is-info is-outlined">Denver</button>
+                            <button class="button is-info is-outlined">Atlanta</button>
+                        </div>
                 </article>
-                <article class="tile is-child notification is-danger" id="weatherBox">
-                    <!--Dynamically append the city name here.-->
-                    <p class="title" id="cityForecast"></p>
-                    <div class="columns is-multiline">
-                        <!-- Content -->
-                        <div class="column" id="currentCityWeather">
-                            <figure class="image">
-                                <i id="currentIcon"></i></figure>
-                            <h6>Currently</h6>
-                            <h1 class="weatherTemp has-text-centered is-size-2" id="currentTemp">
-                                <!--Add temperature here!-->
-                            </h1>
-                            <h3 class="weatherCondition has-text-centered is-size-5" id="currentCondition">
-                                <!--Replace text with string that tells you conditions, like, windy, clear, sunny, stormy-->
-                                Current weather
-                            </h3>
+            </div>
+            <div class="column is-two-thirds">
+                <div class="tile is-parent is-vertical">
+                    <article class="tile is-child notification" id="cityStats">
+                        City Stats
+                    </article>
+                    <article class="tile is-child notification" id="weatherBox">
+                        <!--Dynamically append the city name here.-->
+                        <p class="title" id="cityForecast"></p>
+                        <div class="columns is-multiline">
+                            <!-- Content -->
+                            <div class="column" id="currentCityWeather">
+                                <figure class="image">
+                                    <i id="currentIcon"></i></figure>
+                                <h6>Currently</h6>
+                                <h1 class="weatherTemp has-text-centered is-size-2" id="currentTemp">
+                                    <!--Add temperature here!-->
+                                </h1>
+                                <h3 class="weatherCondition has-text-centered is-size-5" id="currentCondition">
+                                    <!--Replace text with string that tells you conditions, like, windy, clear, sunny, stormy-->
+                                    Current weather
+                                </h3>
+                            </div>
+                            <div class="column" id="day1Forecast">
+                                <figure class="image">
+                                    <i id="day1Icon"></i></figure>
+                                <h6>Tomorrow</h6>
+                                <h1 class="weatherTemp has-text-centered is-size-2" id="day1Temp">
+                                </h1>
+                                <h3 class="weatherCondition has-text-centered is-size-5" id="day1Condition">
+                                    Day 1 weather
+                                </h3>
+                            </div>
+                            <div class="column" id="day2Forecast">
+                                <figure class="image">
+                                    <i id="day2Icon"></i></figure>
+                                <h6>Day Two</h6>
+                                <h1 class="weatherTemp has-text-centered is-size-2" id="day2Temp">
+                                </h1>
+                                <h3 class="weatherCondition has-text-centered is-size-5" id="day2Condition">
+                                    Day 2 weather
+                                </h3>
+                            </div>
+                            <div class="column" id="day3Forecast">
+                                <figure class="image">
+                                    <i id="day3Icon"></i></figure>
+                                <h6>Day Three</h6>
+                                <h1 class="weatherTemp has-text-centered is-size-2" id="day3Temp">
+                                </h1>
+                                <h3 class="weatherCondition has-text-centered is-size-5" id="day3Condition">
+                                    Day 3 weather
+                                </h3>
+                            </div>
+                            <div class="column" id="day4Forecast">
+                                <figure class="image">
+                                    <i id="day4Icon"></i></figure>
+                                <h6>Day Four</h6>
+                                <h1 class="weatherTemp has-text-centered is-size-2" id="day4Temp">
+                                </h1>
+                                <h3 class="weatherCondition has-text-centered is-size-5" id="day4Condition">
+                                    Day 4 weather
+                                </h3>
+                            </div>
+                            <div class="column" id="day5Forecast">
+                                <figure class="image">
+                                    <i id="day5Icon"></i></figure>
+                                <h6>Day Five</h6>
+                                <h1 class="weatherTemp has-text-centered is-size-2" id="day5Temp">
+                                </h1>
+                                <h3 class="weatherCondition has-text-centered is-size-5" id="day5Condition">
+                                    Day 5 weather
+                                </h3>
+                            </div>
                         </div>
-                        <div class="column" id="day1Forecast">
-                            <figure class="image">
-                                <i id="day1Icon"></i></figure>
-                            <h6>Tomorrow</h6>
-                            <h1 class="weatherTemp has-text-centered is-size-2" id="day1Temp">
-                            </h1>
-                            <h3 class="weatherCondition has-text-centered is-size-5" id="day1Condition">
-                                Day 1 weather
-                            </h3>
-                        </div>
-                        <div class="column" id="day2Forecast">
-                            <figure class="image">
-                                <i id="day2Icon"></i></figure>
-                            <h6>Day Two</h6>
-                            <h1 class="weatherTemp has-text-centered is-size-2" id="day2Temp">
-                            </h1>
-                            <h3 class="weatherCondition has-text-centered is-size-5" id="day2Condition">
-                                Day 2 weather
-                            </h3>
-                        </div>
-                        <div class="column" id="day3Forecast">
-                            <figure class="image">
-                                <i id="day3Icon"></i></figure>
-                            <h6>Day Three</h6>
-                            <h1 class="weatherTemp has-text-centered is-size-2" id="day3Temp">
-                            </h1>
-                            <h3 class="weatherCondition has-text-centered is-size-5" id="day3Condition">
-                                Day 3 weather
-                            </h3>
-                        </div>
-                        <div class="column" id="day4Forecast">
-                            <figure class="image">
-                                <i id="day4Icon"></i></figure>
-                            <h6>Day Four</h6>
-                            <h1 class="weatherTemp has-text-centered is-size-2" id="day4Temp">
-                            </h1>
-                            <h3 class="weatherCondition has-text-centered is-size-5" id="day4Condition">
-                                Day 4 weather
-                            </h3>
-                        </div>
-                        <div class="column" id="day5Forecast">
-                            <figure class="image">
-                                <i id="day5Icon"></i></figure>
-                            <h6>Day Five</h6>
-                            <h1 class="weatherTemp has-text-centered is-size-2" id="day5Temp">
-                            </h1>
-                            <h3 class="weatherCondition has-text-centered is-size-5" id="day5Condition">
-                                Day 5 weather
-                            </h3>
-                        </div>
-                    </div>
-                </article>
+                    </article>
+                </div>
             </div>
         </div>
     </div>
-
 
     <footer class="footer">
         <div class="content has-text-centered">
