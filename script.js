@@ -5,19 +5,22 @@ $(document).ready(function () {
     //add var names here
     var searchButton = $("#searchBtn");
     var usCity = $("#cityInput");
+    var austinEl = $("#austin");
+    var chicagoEl = $("#chicago");
+    var newYorkEl = $("#newYork");
+    var orlandoEl = $("#orlando");
+    var sanFranciscoEl = $("#sanFrancisco");
+    var seattleEl = $("#seattle");
+    var denverEl = $("#denver");
+    var atlantaEl = $("#atlanta");
 
     //when page loads, weather should be default, Austin, TX OR LOCAL STORAGE. This is for current weather! 
 
-    var currentWeather = "https://api.openweathermap.org/data/2.5/weather?q=Austin,us&units=imperial&appid=" + weatherKey;
-    //We then create an AJAX call for Austin.
-
-    function queryCurrentWeather() {
+    function queryCurrentWeather(cityName) {
         $.ajax({
-            url: currentWeather,
+            url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + ",us&units=imperial&appid=" + weatherKey,
             method: "GET"
         }).then(function (response) {
-            //Log the queryURL
-            console.log(currentWeather);
             //Log the resulting object
             console.log(response);
             //logging to see if query works.
@@ -39,19 +42,13 @@ $(document).ready(function () {
     }
 
     //runs the function queryCurrentWeather
-    queryCurrentWeather();
+    queryCurrentWeather("Austin");
 
-    // This is for forecast weather!
-    var queryWeather = "https://api.openweathermap.org/data/2.5/forecast?q=Austin,us&units=imperial&appid=" + weatherKey;
-
-    function forecast() {
+    function forecast(cityName) {
         $.ajax({
-            url: queryWeather,
+            url: "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + ",us&units=imperial&appid=" + weatherKey,
             method: "GET"
         }).then(function (response) {
-            //Log the queryURL
-            console.log(queryWeather);
-
             console.log(response);
             //THESE ARE FOR THE FORECAST!
             var tempEl1 = response.list[0].main.temp;
@@ -98,27 +95,56 @@ $(document).ready(function () {
     }
 
     //runs the forecast function
-    forecast();
+    forecast("Austin");
 
     //when you click on submit or press enter, run this callback function
     function callback() {
-        //reassigns currentWeather value to this
-        currentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + usCity[0].value + ",us&units=imperial&appid=" + weatherKey;
         //runs function queryCurrentWeather with this newly assigned currentWeather
-        queryCurrentWeather();
-
-        //reassigns queryWeather value to this
-        queryWeather = "https://api.openweathermap.org/data/2.5/forecast?q=" + usCity[0].value + ",us&units=imperial&appid=" + weatherKey;
-
+        queryCurrentWeather(usCity[0].value);
         //runs forecast function with the newly assigned queryWeather
-        forecast();
+        forecast(usCity[0].value);
     }
 
     searchButton.click(function () {
         callback();
     });
 
-    $("#cityInput").keypress(function () {
+    usCity.keypress(function () {
         if (event.which == 13) callback();
     });
+
+    austinEl.click(function () {
+        queryCurrentWeather("Austin");
+        forecast("Austin");
+    });
+
+    chicagoEl.click(function () {
+        queryCurrentWeather("Chicago");
+        forecast("Chicago");
+    });
+    newYorkEl.click(function () {
+        queryCurrentWeather("New+York");
+        forecast("New+York");
+    });
+    orlandoEl.click(function () {
+        queryCurrentWeather("Orlando");
+        forecast("Orlando");
+    });
+    sanFranciscoEl.click(function () {
+        queryCurrentWeather("San+Francisco");
+        forecast("San+Francisco");
+    });
+    seattleEl.click(function () {
+        queryCurrentWeather("Seattle");
+        forecast("Seattle");
+    });
+    denverEl.click(function () {
+        queryCurrentWeather("Denver");
+        forecast("Denver");
+    });
+    atlantaEl.click(function () {
+        queryCurrentWeather("Atlanta");
+        forecast("Atlanta");
+    });
+
 });

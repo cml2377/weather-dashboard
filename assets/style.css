@@ -12,9 +12,12 @@ font-family: 'Cormorant Garamond', serif;
 font-family: 'Raleway', sans-serif;
 
 */
+html{
+    background-color: rgba(255, 255, 255, 0);
+}
 
 body {
-    background: url("images/valentin-muller-bWtd1ZyEy6w-unsplash.jpg");
+    background: url("images/valentin-muller-bWtd1ZyEy6w-unsplash.jpg") no-repeat center center fixed;
 }
 
 i {
