@@ -38,7 +38,6 @@ $(document).ready(function () {
             var windSpeedEl = response.wind.speed;
             $("#windSpeedResponse").html("Wind Speed: " + windSpeedEl + " mph");
 
-
             //current weather conditions
             var currentConditionEl = response.weather[0].description;
             $("#currentCondition").text(currentConditionEl);
@@ -47,6 +46,15 @@ $(document).ready(function () {
             var flowersIcon = "wi wi-owm-" + iconCode;
             console.log(flowersIcon);
             $("#currentIcon").attr('class', flowersIcon);
+
+            //for UV index, you must pull lat and lon from response above and do another ajax function
+            $.ajax({
+                url: "https://api.openweathermap.org/data/2.5/uvi?appid=" + weatherKey + "&lat=" + response.coord.lat + "&lon=" + response.coord.lon,
+                method: "GET"
+            }).then(function (responseUV) {
+                console.log(responseUV);
+                $("#uvIndexResponse").html("UV Index: " + responseUV.value);
+            });
         });
     }
 

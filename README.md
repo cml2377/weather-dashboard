@@ -8,7 +8,7 @@ These instructions will help you find the weather and weather forecast for any c
 
 ## Running the search engine
 
-Input City OR Zip code.
+Input City or click on any of the buttons below.
 Click on search to return results for any location near you, along with a 5 day weather forecast.
 
 ## Built With

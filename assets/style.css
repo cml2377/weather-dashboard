@@ -80,9 +80,10 @@ h6 {
     font-family: 'Raleway', sans-serif;
 }
 
-#searchBox {
+#searchBoxBg {
     background-color: #9BC1BC;
     padding: 4%;
+    height: 100%;
 }
 
 #frequentlySearched {
