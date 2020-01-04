@@ -92,13 +92,11 @@ $(document).ready(function () {
         $("#day5Icon").attr('class', flowersD5Icon);
     });
 
-    //when the page loads, user input is clear/empty.
 
-
-    //when you click on submit, we will take note of city/state || zip, and radius. THIS DOESN'T WORK YET
+    //when you click on submit, we will take note of city
     submitButton.click(function () {
 
-        var userCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + (usCity[0].value || zipcodeInput[0].value) + ",us&units=imperial&appid=" + weatherKey;
+        var userCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + usCity[0].value + ",us&units=imperial&appid=" + weatherKey;
 
         $.ajax({
             url: userCurrentWeather,
@@ -119,7 +117,7 @@ $(document).ready(function () {
         });
 
         //using user input City/State or Zip, pull weather data.
-        var userInputForecastQuery = "https://api.openweathermap.org/data/2.5/forecast?q=" + (usCity[0].value || zipcodeInput[0].value) + ",us&units=imperial&appid=" + weatherKey;
+        var userInputForecastQuery = "https://api.openweathermap.org/data/2.5/forecast?q=" + usCity[0].value + ",us&units=imperial&appid=" + weatherKey;
 
         $.ajax({
             url: userInputForecastQuery,
@@ -172,7 +170,6 @@ $(document).ready(function () {
         clearButton.on("click", function () {
             $('select option:contains("Select Dropdown")').prop('selected', true);
             usCity[0].value = "";
-            zipcodeInput[0].value = "";
         });
     });
 });

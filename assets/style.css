@@ -39,11 +39,25 @@ h6 {
     border-radius: 0%;
 }
 
-.button.is-info.is-outlined {
+#searchBtn {
     border-radius: 0%;
-    width: 90%;
+}
+
+.button.is-info {
+    border-radius: 0%;
+    width: 100%;
     color: #17BEBB;
     background-color: #FCFFF7;
+}
+
+.button.is-info:hover {
+    background-color: #ED6A5A;
+}
+.button.is-info:active {
+    background-color: #17BEBB;
+}
+.button.is-info:focus {
+    background-color: #17BEBB;
 }
 
 .tile.is-vertical {
@@ -52,6 +66,7 @@ h6 {
 
 #searchBox {
     background-color: #9BC1BC;
+    padding: 4%;
 }
 
 #weatherDashboardTitle {
