@@ -18,33 +18,32 @@ $(document).ready(function () {
 
     function queryCurrentWeather(cityName) {
         $.ajax({
-            url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + ",us&units=imperial&appid=" + weatherKey,
+            url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + weatherKey,
             method: "GET"
         }).then(function (response) {
             //Log the resulting object
             console.log(response);
+
             //logging to see if query works.
             var cityEl = response.name;
             $("#cityStats").html(cityEl);
             $("#cityForecast").html("Weather Forecast: " + cityEl);
+
             //This is for current weather!
             var currentTempEl = response.main.temp;
             $("#temperatureResponse").html("Current Temperature: " + currentTempEl + "&deg;F");
             $("#currentTemp").html(currentTempEl + "&deg;F");
 
             //stats for box above weather icons
-            var humidityEl = response.main.humidity;
-            $("#humidityResponse").html("Humidity: " + humidityEl + "&#37;");
-            var windSpeedEl = response.wind.speed;
-            $("#windSpeedResponse").html("Wind Speed: " + windSpeedEl + " mph");
+            $("#humidityResponse").html("Humidity: " + response.main.humidity + "&#37;"); //humidity
+            $("#windSpeedResponse").html("Wind Speed: " + response.wind.speed + " mph"); //wind speed
 
             //current weather conditions
-            var currentConditionEl = response.weather[0].description;
+            var currentConditionEl = response.weather[0].description; //this is in the icon box
             $("#currentCondition").text(currentConditionEl);
             //current weather icon
             var iconCode = response.weather[0].id;
             var flowersIcon = "wi wi-owm-" + iconCode;
-            console.log(flowersIcon);
             $("#currentIcon").attr('class', flowersIcon);
 
             //for UV index, you must pull lat and lon from response above and do another ajax function
@@ -53,17 +52,48 @@ $(document).ready(function () {
                 method: "GET"
             }).then(function (responseUV) {
                 console.log(responseUV);
-                $("#uvIndexResponse").html("UV Index: " + responseUV.value);
+                $("#wikiUVLink").html(responseUV.value);
+                //adds a link to wikipedia's page on UV ranges and their color codes
+                $("#wikiUVLink").attr("href", "https://en.wikipedia.org/wiki/Ultraviolet_index#Index_usage");
+                $("#wikiUVLink").attr("target", "_blank");
+
+                if (responseUV.value <= 2) {
+                    $("#wikiUVLink").css("background-color", "green");
+                } else if ((2 < responseUV.value) && (responseUV.value <= 5)) {
+                    $("#wikiUVLink").css("background-color", "yellow");
+                } else if ((5 < responseUV.value) && (responseUV.value <= 7)) {
+                    $("#wikiUVLink").css("background-color", "orange");
+                } else if ((7 < responseUV.value) && (responseUV.value <= 10)) {
+                    $("#wikiUVLink").css("background-color", "red");
+                } else {
+                    $("#wikiUVLink").css("background-color", "purple");
+                }
             });
         });
     }
+
+    /* just an attempt to try to add photos if there is time
+    
+    function queryImage(cityName){
+    $.ajax({
+        url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + weatherKey,
+        method: "GET"
+    }).then(function (response) {
+        //Log the resulting object
+        console.log(response);
+    }
+
+*/
+
+    //runs the function queryImage; not working
+    //function queryImage("Austin");
 
     //runs the function queryCurrentWeather
     queryCurrentWeather("Austin");
 
     function forecast(cityName) {
         $.ajax({
-            url: "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + ",us&units=imperial&appid=" + weatherKey,
+            url: "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + weatherKey,
             method: "GET"
         }).then(function (response) {
             console.log(response);

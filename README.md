@@ -6,10 +6,12 @@ A weather dashboard application with search functionality to find current weathe
 These instructions will help you find the weather and weather forecast for any city you search for.
 * [Click Here!](https://cml2377.github.io/weather-dashboard/)
 
-## Running the search engine
-
-Input City or click on any of the buttons below.
-Click on search to return results for any location near you, along with a 5 day weather forecast.
+## How it Works
+<img src="assets/images/weather-dashboard.png" width="100%" height="auto">
+Input a city name from anywhere in the world or click on any of the buttons below.
+Click on search or press enter to return results for any location near you, along with a 5 day weather forecast.
+<img src="assets/images/weather-dashboard2.png" width="100%" height="auto">
+You can click on the UV index number to open up a new tab with Wikipedia's chart on UV Indices and their meanings.
 
 ## Built With
 
