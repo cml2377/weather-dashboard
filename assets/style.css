@@ -157,3 +157,51 @@ a {
 #bgCredit {
     float: right;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #weatherDashboardTitle {
+        font-size: 3rem;
+    }
+    #searchTitle {
+        font-size: 2rem;
+    }
+    #cityStats {
+        font-size: 2.4rem;
+    }
+    #cityForecast {
+        font-size: 2rem;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    #weatherDashboardTitle {
+        font-size: 3rem;
+    }
+    #searchTitle  {
+        font-size: 2rem;
+    }
+    #cityStats {
+        font-size: 2.4rem;
+    }
+    #cityForecast {
+        font-size: 2rem;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    #weatherDashboardTitle {
+        font-size: 4rem;
+    }
+    #searchTitle {
+        font-size: 2rem;
+    }
+    #cityStats {
+        font-size: 2.4rem;
+    }
+    #cityForecast {
+        font-size: 2rem;
+    }
+}
