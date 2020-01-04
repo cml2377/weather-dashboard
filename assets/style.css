@@ -17,7 +17,11 @@ html{
 }
 
 body {
-    background: url("images/valentin-muller-bWtd1ZyEy6w-unsplash.jpg") no-repeat center center fixed;
+    background: url("images/valentin-muller-bWtd1ZyEy6w-unsplash.jpg") no-repeat fixed;
+}
+
+p {
+    font-size: 24px;
 }
 
 i {
@@ -67,9 +71,22 @@ h6 {
     padding: 0rem;
 }
 
+#searchTitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+}
+
+.label {
+    font-family: 'Raleway', sans-serif;
+}
+
 #searchBox {
     background-color: #9BC1BC;
     padding: 4%;
+}
+
+#frequentlySearched {
+    font-family: 'Raleway', sans-serif;
 }
 
 #weatherDashboardTitle {
@@ -78,17 +95,21 @@ h6 {
     color: #FCFFF7;
 }
 
-#cityStats{
+#statBox{
     background-color: #F4F1BB;
+    font-family: 'Raleway', sans-serif;
+    font-size: 3rem;
 }
 
 #weatherBox {
     background-color: #ED6A5A;
     color: #F4F1BB;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 #cityForecast {
     font-family: 'Raleway', sans-serif;
+    font-size: 3rem;
     font-weight: 100;
 }
 
@@ -110,13 +131,17 @@ h6 {
 }
 
 #footerTxt {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-family: 'Cormorant Garamond', serif;
     color: #FCFFF7;
 }
 
 a {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-family: 'Cormorant Garamond', serif;
     color: #17BEBB;
+}
+
+#bgCredit {
+    float: right;
 }

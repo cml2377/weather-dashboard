@@ -25,11 +25,20 @@ $(document).ready(function () {
             console.log(response);
             //logging to see if query works.
             var cityEl = response.name;
+            $("#cityStats").html(cityEl);
             $("#cityForecast").html("Weather Forecast: " + cityEl);
             //This is for current weather!
             var currentTempEl = response.main.temp;
-            console.log(currentTempEl);
+            $("#temperatureResponse").html("Current Temperature: " + currentTempEl + "&deg;F");
             $("#currentTemp").html(currentTempEl + "&deg;F");
+
+            //stats for box above weather icons
+            var humidityEl = response.main.humidity;
+            $("#humidityResponse").html("Humidity: " + humidityEl + "&#37;");
+            var windSpeedEl = response.wind.speed;
+            $("#windSpeedResponse").html("Wind Speed: " + windSpeedEl + " mph");
+
+
             //current weather conditions
             var currentConditionEl = response.weather[0].description;
             $("#currentCondition").text(currentConditionEl);

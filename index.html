@@ -35,7 +35,7 @@
             <div class="column is-one-third">
                 <article class="tile is-child notification" id="searchBox">
                     <!--Search bar and frequently searched cities-->
-                    <p class="title">Search</p>
+                    <p class="title" id="searchTitle">Search</p>
                     <div id="searchBox">
                         <label class="label is-medium">City</label>
                         <!--Input field for City-->
@@ -62,9 +62,14 @@
             </div>
             <div class="column is-two-thirds">
                 <div class="tile is-parent is-vertical">
-                    <article class="tile is-child notification" id="cityStats">
-                        City Stats
+                    <article class="tile is-child notification" id="statBox">
+                        <h4 id="cityStats"></h4>
+                        <p id="temperatureResponse"></p>
+                        <p id="humidityResponse"></p>
+                        <p id="windSpeedResponse"></p>
+                        <p id="uvIndexResponse"></p>
                     </article>
+
                     <article class="tile is-child notification" id="weatherBox">
                         <!--Dynamically append the city name here.-->
                         <p class="title" id="cityForecast"></p>
@@ -145,7 +150,8 @@
                 Weather Dashboard by <a href="https://github.com/cml2377">Crystal Ly</a>. Copyright &copy; 2020
             </p>
         </div>
-        <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+        <a id="bgCredit"
+            style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
             href="https://unsplash.com/@valentinmuellerandalanmueller?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
             target="_blank" rel="noopener noreferrer"
             title="Download free do whatever you want high-resolution photos from Valentin Müller"><span
