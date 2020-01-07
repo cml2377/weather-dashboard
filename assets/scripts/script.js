@@ -23,23 +23,76 @@ $(document).ready(function () {
 
     function success(pos) {
         var crd = pos.coords;
-
+        //if user provides geolocation: 
         console.log('Your current position is:');
         console.log(`Latitude : ${crd.latitude}`);
         console.log(`Longitude: ${crd.longitude}`);
         console.log(`More or less ${crd.accuracy} meters.`);
-        queryLocationWeather();
+        $.ajax({
+            url: "https://api.openweathermap.org/data/2.5/weather?lat=" + crd.latitude + "&lon=" + crd.longitude + "&units=imperial&appid=" + weatherKey,
+            method: "GET"
+        }).then(function (response) {
+            //Log the resulting object
+            console.log(response);
+
+            var cityEl = response.name;
+            $("#cityStats").html(cityEl);
+            $("#cityForecast").html("Weather Forecast: " + cityEl);
+
+            //This is for current weather!
+            var currentTempEl = response.main.temp;
+            $("#temperatureResponse").html("Current Temperature: " + currentTempEl + "&deg;F");
+            $("#currentTemp").html(currentTempEl + "&deg;F");
+
+            //stats for box above weather icons
+            $("#humidityResponse").html("Humidity: " + response.main.humidity + "&#37;"); //humidity
+            $("#windSpeedResponse").html("Wind Speed: " + response.wind.speed + " mph"); //wind speed
+
+            //current weather conditions
+            var currentConditionEl = response.weather[0].description; //this is in the icon box
+            $("#currentCondition").text(currentConditionEl);
+            //current weather icon
+            var iconCode = response.weather[0].id;
+            var flowersIcon = "wi wi-owm-" + iconCode;
+            $("#currentIcon").attr('class', flowersIcon);
+
+            //for UV index, you must pull lat and lon from response above and do another ajax function
+            $.ajax({
+                url: "https://api.openweathermap.org/data/2.5/uvi?appid=" + weatherKey + "&lat=" + response.coord.lat + "&lon=" + response.coord.lon,
+                method: "GET"
+            }).then(function (responseUV) {
+                console.log(responseUV);
+                $("#wikiUVLink").html(responseUV.value);
+                //adds a link to wikipedia's page on UV ranges and their color codes
+                $("#wikiUVLink").attr("href", "https://en.wikipedia.org/wiki/Ultraviolet_index#Index_usage");
+                $("#wikiUVLink").attr("target", "_blank");
+
+                if (responseUV.value <= 2) {
+                    $("#wikiUVLink").css("background-color", "green");
+                } else if ((2 < responseUV.value) && (responseUV.value <= 5)) {
+                    $("#wikiUVLink").css("background-color", "yellow");
+                } else if ((5 < responseUV.value) && (responseUV.value <= 7)) {
+                    $("#wikiUVLink").css("background-color", "orange");
+                } else if ((7 < responseUV.value) && (responseUV.value <= 10)) {
+                    $("#wikiUVLink").css("background-color", "red");
+                } else {
+                    $("#wikiUVLink").css("background-color", "purple");
+                }
+            });
+        });
     }
 
     function error(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
+        //if user denies geolocation, run Austin as default.
+        queryCurrentWeather("Austin");
     }
 
     navigator.geolocation.getCurrentPosition(success, error, options);
 
 
     //this will populate the date in the weather div.
-    var momentDates = moment().format("MMMM Do YYYY")
+    var momentDates = moment().format("MMMM Do YYYY");
     $("#currentDate").append(momentDates);
     $("#dateBox").append(momentDates);
 
@@ -49,7 +102,7 @@ $(document).ready(function () {
 
         $("#day" + i + "Date").append(addDay.format("MMMM Do YYYY"));
 
-    };
+    }
 
 
     //when page loads, weather should be default, Austin, TX OR LOCAL STORAGE. This is for current weather! 
@@ -109,67 +162,6 @@ $(document).ready(function () {
             });
         });
     }
-
-    //runs function geolocatedWeather if location is provided.
-    if (success === true) {
-        function queryLocationWeather() {
-            $.ajax({
-                url: "https://api.openweathermap.org/data/2.5/weather?lat=" + crd.latitude + "&lon=" + crd.longitude + "&units=imperial&appid=" + weatherKey,
-                method: "GET"
-            }).then(function (response) {
-                //Log the resulting object
-                console.log(response);
-
-                var cityEl = response.name;
-                $("#cityStats").html(cityEl);
-                $("#cityForecast").html("Weather Forecast: " + cityEl);
-
-                //This is for current weather!
-                var currentTempEl = response.main.temp;
-                $("#temperatureResponse").html("Current Temperature: " + currentTempEl + "&deg;F");
-                $("#currentTemp").html(currentTempEl + "&deg;F");
-
-                //stats for box above weather icons
-                $("#humidityResponse").html("Humidity: " + response.main.humidity + "&#37;"); //humidity
-                $("#windSpeedResponse").html("Wind Speed: " + response.wind.speed + " mph"); //wind speed
-
-                //current weather conditions
-                var currentConditionEl = response.weather[0].description; //this is in the icon box
-                $("#currentCondition").text(currentConditionEl);
-                //current weather icon
-                var iconCode = response.weather[0].id;
-                var flowersIcon = "wi wi-owm-" + iconCode;
-                $("#currentIcon").attr('class', flowersIcon);
-
-                //for UV index, you must pull lat and lon from response above and do another ajax function
-                $.ajax({
-                    url: "https://api.openweathermap.org/data/2.5/uvi?appid=" + weatherKey + "&lat=" + response.coord.lat + "&lon=" + response.coord.lon,
-                    method: "GET"
-                }).then(function (responseUV) {
-                    console.log(responseUV);
-                    $("#wikiUVLink").html(responseUV.value);
-                    //adds a link to wikipedia's page on UV ranges and their color codes
-                    $("#wikiUVLink").attr("href", "https://en.wikipedia.org/wiki/Ultraviolet_index#Index_usage");
-                    $("#wikiUVLink").attr("target", "_blank");
-
-                    if (responseUV.value <= 2) {
-                        $("#wikiUVLink").css("background-color", "green");
-                    } else if ((2 < responseUV.value) && (responseUV.value <= 5)) {
-                        $("#wikiUVLink").css("background-color", "yellow");
-                    } else if ((5 < responseUV.value) && (responseUV.value <= 7)) {
-                        $("#wikiUVLink").css("background-color", "orange");
-                    } else if ((7 < responseUV.value) && (responseUV.value <= 10)) {
-                        $("#wikiUVLink").css("background-color", "red");
-                    } else {
-                        $("#wikiUVLink").css("background-color", "purple");
-                    }
-                });
-            });
-        }
-    } else {
-        //runs the function queryCurrentWeather if geolocation is not provided.
-        queryCurrentWeather("Austin");
-    };
 
     function forecast(cityName) {
         $.ajax({
