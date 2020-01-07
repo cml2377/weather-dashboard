@@ -14,9 +14,34 @@ $(document).ready(function () {
     var denverEl = $("#denver");
     var atlantaEl = $("#atlanta");
 
+    //prompt for user location
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
+
+    function success(pos) {
+        var crd = pos.coords;
+
+        console.log('Your current position is:');
+        console.log(`Latitude : ${crd.latitude}`);
+        console.log(`Longitude: ${crd.longitude}`);
+        console.log(`More or less ${crd.accuracy} meters.`);
+        queryLocationWeather();
+    }
+
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
+
     //this will populate the date in the weather div.
     var momentDates = moment().format("MMMM Do YYYY")
     $("#currentDate").append(momentDates);
+    $("#dateBox").append(momentDates);
 
     for (i = 1; i < 6; i++) {
         var addDay = moment().add(i, 'days');
@@ -85,24 +110,66 @@ $(document).ready(function () {
         });
     }
 
-    /* just an attempt to try to add photos if there is time
-    
-    function queryImage(cityName){
-    $.ajax({
-        url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + weatherKey,
-        method: "GET"
-    }).then(function (response) {
-        //Log the resulting object
-        console.log(response);
-    }
+    //runs function geolocatedWeather if location is provided.
+    if (success === true) {
+        function queryLocationWeather() {
+            $.ajax({
+                url: "https://api.openweathermap.org/data/2.5/weather?lat=" + crd.latitude + "&lon=" + crd.longitude + "&units=imperial&appid=" + weatherKey,
+                method: "GET"
+            }).then(function (response) {
+                //Log the resulting object
+                console.log(response);
 
-*/
+                var cityEl = response.name;
+                $("#cityStats").html(cityEl);
+                $("#cityForecast").html("Weather Forecast: " + cityEl);
 
-    //runs the function queryImage; not working
-    //function queryImage("Austin");
+                //This is for current weather!
+                var currentTempEl = response.main.temp;
+                $("#temperatureResponse").html("Current Temperature: " + currentTempEl + "&deg;F");
+                $("#currentTemp").html(currentTempEl + "&deg;F");
 
-    //runs the function queryCurrentWeather
-    queryCurrentWeather("Austin");
+                //stats for box above weather icons
+                $("#humidityResponse").html("Humidity: " + response.main.humidity + "&#37;"); //humidity
+                $("#windSpeedResponse").html("Wind Speed: " + response.wind.speed + " mph"); //wind speed
+
+                //current weather conditions
+                var currentConditionEl = response.weather[0].description; //this is in the icon box
+                $("#currentCondition").text(currentConditionEl);
+                //current weather icon
+                var iconCode = response.weather[0].id;
+                var flowersIcon = "wi wi-owm-" + iconCode;
+                $("#currentIcon").attr('class', flowersIcon);
+
+                //for UV index, you must pull lat and lon from response above and do another ajax function
+                $.ajax({
+                    url: "https://api.openweathermap.org/data/2.5/uvi?appid=" + weatherKey + "&lat=" + response.coord.lat + "&lon=" + response.coord.lon,
+                    method: "GET"
+                }).then(function (responseUV) {
+                    console.log(responseUV);
+                    $("#wikiUVLink").html(responseUV.value);
+                    //adds a link to wikipedia's page on UV ranges and their color codes
+                    $("#wikiUVLink").attr("href", "https://en.wikipedia.org/wiki/Ultraviolet_index#Index_usage");
+                    $("#wikiUVLink").attr("target", "_blank");
+
+                    if (responseUV.value <= 2) {
+                        $("#wikiUVLink").css("background-color", "green");
+                    } else if ((2 < responseUV.value) && (responseUV.value <= 5)) {
+                        $("#wikiUVLink").css("background-color", "yellow");
+                    } else if ((5 < responseUV.value) && (responseUV.value <= 7)) {
+                        $("#wikiUVLink").css("background-color", "orange");
+                    } else if ((7 < responseUV.value) && (responseUV.value <= 10)) {
+                        $("#wikiUVLink").css("background-color", "red");
+                    } else {
+                        $("#wikiUVLink").css("background-color", "purple");
+                    }
+                });
+            });
+        }
+    } else {
+        //runs the function queryCurrentWeather if geolocation is not provided.
+        queryCurrentWeather("Austin");
+    };
 
     function forecast(cityName) {
         $.ajax({
@@ -163,6 +230,8 @@ $(document).ready(function () {
         queryCurrentWeather(usCity[0].value);
         //runs forecast function with the newly assigned queryWeather
         forecast(usCity[0].value);
+        //adds random image from Unsplash
+        $("#randoImg").attr("src", "https://source.unsplash.com/featured/?" + usCity.val() + ",city");
     }
 
     searchButton.click(function () {
@@ -176,35 +245,43 @@ $(document).ready(function () {
     austinEl.click(function () {
         queryCurrentWeather("Austin");
         forecast("Austin");
+        $("#randoImg").attr("src", "https://source.unsplash.com/featured/?austin,city/");
     });
 
     chicagoEl.click(function () {
         queryCurrentWeather("Chicago");
         forecast("Chicago");
+        $("#randoImg").attr("src", "https://source.unsplash.com/featured/?chicago,city/");
     });
     newYorkEl.click(function () {
         queryCurrentWeather("New+York");
         forecast("New+York");
+        $("#randoImg").attr("src", "https://source.unsplash.com/featured/?new+york,city/");
     });
     orlandoEl.click(function () {
         queryCurrentWeather("Orlando");
         forecast("Orlando");
+        $("#randoImg").attr("src", "https://source.unsplash.com/featured/?orlando,city/");
     });
     sanFranciscoEl.click(function () {
         queryCurrentWeather("San+Francisco");
         forecast("San+Francisco");
+        $("#randoImg").attr("src", "https://source.unsplash.com/featured/?san+francisco,city/");
     });
     seattleEl.click(function () {
         queryCurrentWeather("Seattle");
         forecast("Seattle");
+        $("#randoImg").attr("src", "https://source.unsplash.com/featured/?seattle,city/");
     });
     denverEl.click(function () {
         queryCurrentWeather("Denver");
         forecast("Denver");
+        $("#randoImg").attr("src", "https://source.unsplash.com/featured/?denver,city/");
     });
     atlantaEl.click(function () {
         queryCurrentWeather("Atlanta");
         forecast("Atlanta");
+        $("#randoImg").attr("src", "https://source.unsplash.com/featured/?atlanta,city/");
     });
 
 });
