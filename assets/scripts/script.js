@@ -14,6 +14,19 @@ $(document).ready(function () {
     var denverEl = $("#denver");
     var atlantaEl = $("#atlanta");
 
+    //this will populate the date in the weather div.
+    var momentDates = moment().format("MMMM Do YYYY")
+    $("#currentDate").append(momentDates);
+
+    for (i = 1; i < 6; i++) {
+        var addDay = moment().add(i, 'days');
+        console.log(addDay.format("MMMM Do YYYY"));
+
+        $("#day" + i + "Date").append(addDay.format("MMMM Do YYYY"));
+
+    };
+
+
     //when page loads, weather should be default, Austin, TX OR LOCAL STORAGE. This is for current weather! 
 
     function queryCurrentWeather(cityName) {
